@@ -13,19 +13,19 @@ def RemakeList(dx_list, dx_index):
 score_dic = dict()
 score_list = []
 
-dividend_yield_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[1], reverse=True)   # 배당 수익률 오름 차순 정렬
-dividend_growth_1y_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[2], reverse=True)   # 배당 성장률 1Y 오름 차순 정렬
-dividend_growth_3y_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[3], reverse=True)   # 배당 성장률 3Y 오름 차순 정렬
-dividend_growth_5y_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[4], reverse=True)   # 배당 성장률 5Y 오름 차순 정렬
-payout_ratio_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[5], reverse=False)   # 배당 성향 오름 차순 정렬
+dividend_yield_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[1], reverse=True)          # 배당 수익률 오름 차순 정렬
+dividend_growth_1y_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[2], reverse=True)      # 배당 성장률 1Y 오름 차순 정렬
+dividend_growth_3y_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[3], reverse=True)      # 배당 성장률 3Y 오름 차순 정렬
+dividend_growth_5y_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[4], reverse=True)      # 배당 성장률 5Y 오름 차순 정렬
+payout_ratio_list = sorted(StockDividendData.stock_dividend_data_list, key=lambda x: x[5], reverse=False)           # 배당 성향 오름 차순 정렬
 
 dividend_list = [dividend_yield_list, dividend_growth_1y_list, dividend_growth_3y_list, dividend_growth_5y_list, payout_ratio_list]
 for i in range(len(dividend_list)):
      dividend_list[i] = RemakeList(dividend_list[i], i + 1)     # 정렬된 정보만 남기고 다른 정보 제거
 
 # 항목별 1등 출력
-for i in range(len(dividend_yield_list)):
-    print(dividend_list[0][i], dividend_list[1][i], dividend_list[2][i], dividend_list[3][i], dividend_list[4][i])
+# for i in range(len(dividend_yield_list)):
+#     print(dividend_list[0][i], dividend_list[1][i], dividend_list[2][i], dividend_list[3][i], dividend_list[4][i])
 
 # 각 순위 리스트에서 받아와 score_dic에 점수를 부여한다.
 for i in range(len(dividend_list)):
@@ -39,7 +39,7 @@ for i in range(len(dividend_list)):
             score_dic[TICKER].append(rank)
         rank += 1
 
-
+# 종합 점수 계산
 for key in score_dic.keys():
 
     score_sum = sum(score_dic[key])

@@ -17,6 +17,10 @@ XPATH_list = [
 progress_rate = 0
 cnt = 1
 
+# 기존 파일에 쓰여 있는 내용을 모두 삭제
+with open("TextDirectory/StockDividendData.txt","w") as f:
+    pass
+
 # with-as절을 통해 명령어가 끝나면 자체적으로 driver 객체를 소멸시켜 준다. 크롬 드라이버 객체 생성, Chrome 브라우저 실행
 with webdriver.Chrome(service=Service(ChromeDriverManager().install())) as driver:
 
@@ -30,15 +34,21 @@ with webdriver.Chrome(service=Service(ChromeDriverManager().install())) as drive
         driver.get(link)
 
         # 요청이 완벽하게 응답이 되면 다음을 실행하거나 10초를 기다린다. -> 10초까지를 기다리는데 렌더링이 끝나면 그때 종료
-        driver.implicitly_wait(10)
+        driver.implicitly_wait(20)
 
         # 웹페이지에서 필요한 정보 크롤링
-        dividend_yield = driver.find_element(By.XPATH, XPATH_list[0]).text
-        dividend_growth_1y = driver.find_element(By.XPATH, XPATH_list[1]).text
-        dividend_growth_3y = driver.find_element(By.XPATH, XPATH_list[2]).text
-        dividend_growth_5y = driver.find_element(By.XPATH, XPATH_list[3]).text
-        payout_ratio = driver.find_element(By.XPATH, XPATH_list[4]).text
+        web_info_list = [0 for _ in range(5)]
+        web_info_list[0] = driver.find_element(By.XPATH, XPATH_list[0]).text     # 배당 수익률
+        web_info_list[1] = driver.find_element(By.XPATH, XPATH_list[1]).text     # 배당 성장률 1Y
+        web_info_list[2] = driver.find_element(By.XPATH, XPATH_list[2]).text     # 배당 성장률 3Y
+        web_info_list[3] = driver.find_element(By.XPATH, XPATH_list[3]).text     # 배당 성장률 5Y
+        web_info_list[4] = driver.find_element(By.XPATH, XPATH_list[4]).text     # 배당 성향
 
-        print(TICKER, dividend_yield, dividend_growth_1y, dividend_growth_3y, dividend_growth_5y, payout_ratio, str(progress_rate) + "%")
+        print(TICKER, web_info_list[0], web_info_list[1], web_info_list[2], web_info_list[3], web_info_list[4], str(progress_rate) + "%")
+        web_info_string = " ".join(map(str, web_info_list))
+
+        # 웹에서 불러온 정보를 파일에 a(append)모드로 삽입
+        with open("TextDirectory/StockDividendData.txt", "a") as f:
+            f.write(str(TICKER) + " " + web_info_string + "\n")
+
         cnt += 1
-
