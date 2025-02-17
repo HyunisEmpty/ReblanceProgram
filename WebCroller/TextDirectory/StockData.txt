@@ -1,0 +1,10 @@
+AFL	https://www.dividend.com/stocks/financials/insurance/life-insurance/afl-aflac/
+SNA	https://www.dividend.com/stocks/consumer-discretionary/home-office-products/home-improvement/sna-snap-on/
+KR	https://www.dividend.com/stocks/consumer-staples/retail-consumer-staples/food-drug-stores/kr-kroger/
+MS	https://www.dividend.com/stocks/financials/institutional-financial-service/institutional-brokerage/ms-morgan-stanley/
+V	https://www.dividend.com/stocks/financials/specialty-finance/consumer-finance/v-visa/
+MA	https://www.dividend.com/stocks/financials/specialty-finance/consumer-finance/ma-mastercard/
+PNNT	https://www.dividend.com/stocks/financials/asset-management/investment-management/pnnt-pennantpark-investment-corporation/
+R	https://www.dividend.com/stocks/industrials/transportation-logistics/logistics-services/r-ryder-system/
+AMGN	https://www.dividend.com/stocks/health-care/biotech-pharma/biotech/amgn-amgen/
+HPQ	https://www.dividend.com/stocks/technology/hardware/computer-hardware-storage/hpq-hewlett-packard/
