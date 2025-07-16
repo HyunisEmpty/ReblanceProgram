@@ -1,4 +1,4 @@
-# StockData.py
+# driver_setup.py
 
 """
 driver_setup.py
@@ -21,13 +21,19 @@ undetected_chromedriver(uc)를 사용하여 봇 감지 우회를 지원합니다
     driver.get("https://example.com")
 """
 
-stock_link_dic = dict()
-stock_ticker_list = []      # 티커별 주소를 저장하는 딕셔너리
-stock_rank_dic = dict()         # 티커별 점수를 저장하는 딕셔너리
-with open("TextDirectory/StockData.txt", 'r') as f:
-    for line in f:
-        TICKER, link = line.split()
-        stock_ticker_list.append(TICKER)    # 티커 저장
-        stock_link_dic[TICKER] = link       # 티커, 주소 저장
-        stock_rank_dic[TICKER] = [["dividend_yield", "dividend_growth_1y", "dividend_growth_3y", "dividend_growth_5y", "payout_ratio"]]
+import undetected_chromedriver as uc
 
+def get_driver():
+    options = uc.ChromeOptions()
+    options.add_argument("--start-maximized")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+    )
+
+    driver = uc.Chrome(options=options, use_subprocess=True)
+    return driver
